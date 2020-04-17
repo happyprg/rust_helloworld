@@ -1,9 +1,15 @@
 fn main() {
     let search_txt = String::from("text search gogogogo");
-    picking_first_word(&search_txt);
+    let word = picking_first_word(&search_txt);
+    println!("{}", word);
 }
 
-fn picking_first_word(s: &String) {
-    let word: Vec<_> = s.split(' ').collect();
-    println!("{}", word[0]);
+fn picking_first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &char) in bytes.iter().enumerate() {
+        if char == b' ' {
+            return &s[..i]
+        }
+    }
+    return &s[..]
 }
